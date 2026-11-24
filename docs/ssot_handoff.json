@@ -1,0 +1,52 @@
+{
+  "schema_version": "1.0",
+  "exported_at": "2026-11-24T16:28:00+09:00",
+  "origin_conversation_id": "73c06497-9fe5-4dc9-83e0-e93d897f341f",
+  "scope_note": "Contains only decisions and negative knowledge from the Rust/Python AI Infra deliberate-practice session. Unrelated local SSOT entries are intentionally excluded.",
+  "active_decisions": [
+    {
+      "topic_key": "strategy.oss_contribution_roi_2026",
+      "decision_value": "2026년 오픈소스 PR 기여는 '이력서용 드라이브바이 PR/잔디 채우기'에서 순기댓값이 음수(-)로 붕괴했으며, (1) 본인 프로덕션 의존성 버그의 업스트림 부채 해소, (2) 핵심 인프라 레포 1~2곳에 대한 트리아지·RFC·리뷰 중심의 장기 길드 신뢰(Vouch) 확보, (3) 대형 전투검증 코드베이스의 독해·검증 근육 훈련이라는 3개 목적 함수에서만 양수(+) ROI가 성립함.",
+      "rationale": "AI 코딩 에이전트로 패치 작성 비용(C_write)이 0에 수렴한 반면 메인테이너 검증 비용(C_review)은 오히려 증가하여 스펜스 신호 분리와 노력 기반 배압이 붕괴했고, 주요 OSS 프로젝트가 개방형 광장에서 신뢰 화이트리스트 길드로 상전이함.",
+      "evidence_ids": [
+        "linearb-2026-8.1m-pr-benchmark",
+        "curl-pr-20312-bugbounty-shutdown",
+        "mitchellh-vouch-2026",
+        "tldraw-auto-close-external-prs",
+        "matplotlib-feb2026-ai-agent-rejection"
+      ]
+    },
+    {
+      "topic_key": "strategy.oss_training_protocol_c",
+      "decision_value": "엔지니어링 체력 단련(목적 C)이 목표라면 '외부 PR 머지'를 주 훈련 수단으로 삼지 말고, (1) 기머지 핵심 커밋 직전으로 되돌려 직접 패치 후 리뷰 쓰레드와 대조하는 Shadow PR(비공개 코드 고고학), (2) 방치 이슈의 MRE·git bisect 근본 원인 추적(PR 없는 공개 기여), (3) 밑바닥 마이크로 재구현+카오스 장애 주입(Fault Injection)에 시간의 80~90%를 쓰고, 실제 PR은 연 2~4건의 비타협적 외부 리뷰 스파링 용도로만 분리 배치할 것. AI는 코드 작성기가 아닌 적대적 리뷰어/반례 생성기로만 역전 사용.",
+      "rationale": "외부 PR 중심 훈련은 3주 이상의 리뷰 대기 지연, 신규 기여자의 사소한 표면 패치 고착(선택 편향), 프로덕션 장애/운영 피드백 부재로 인해 시간당 학습 밀도가 크게 떨어지므로, 오픈소스 코드베이스의 가치(역사적 흉터·불변식·설계 토론)만 지연 없이 추출하는 훈련으로 분리해야 함.",
+      "evidence_ids": [
+        "deliberate-practice-feedback-latency",
+        "oss-trivial-patch-selection-bias",
+        "ai-era-read-verify-bottleneck"
+      ]
+    },
+    {
+      "topic_key": "training.rust_python_ai_infra_4w_plan",
+      "decision_value": "Rust 시스템 + Python AI 인프라 주당 20시간 4주 체력 단련 커리큘럼 확정: (1) Shadow PR 3대 직교 레포 = tokio-rs/tokio(동시성/Loom/Miri), vllm-project/vllm(vllm/v1/core CPU 스케줄러·KV캐시 한정), sgl-project/sglang(sgl-router/sgl-model-gateway·Rust RadixCache 한정), (2) 병행 밑바닥 재구현 = Mini-PagedRadix(Arena 기반 Rust Intrusive LRU Radix Tree + Paged KV Allocator + PyO3 FFI + Python Reference Oracle 50k스텝 차등 퍼징 + 카오스 장애 주입), (3) 주당 배분 = Shadow PR 8h + 재구현 9h + PR 없는 트리아지/리뷰 3h.",
+      "rationale": "GPU 하드웨어 의존성을 배제해 로컬 CPU에서 초고속 피드백 루프를 유지하면서, Rust 저수준 동시성·Python 추론 제어 평면·Rust↔Python FFI 경계의 3개 직교 근육을 동시에 단련하고 Python Reference Oracle 차등 퍼징으로 실전 검증 체계까지 내재화하기 위함.",
+      "evidence_ids": [
+        "vllm-v1-cpu-unit-test-separation",
+        "sglang-rust-router-radix-parity-oracle",
+        "tokio-loom-miri-labels"
+      ]
+    }
+  ],
+  "negative_knowledge": [
+    {
+      "topic_key": "strategy.oss_training_protocol_c",
+      "rejected_hypothesis": "오픈소스에 직접 PR을 자주 제출·머지하는 것이 2026년 기준 엔지니어링 체력 단련의 최선책이다.",
+      "chosen_alternative": "Shadow PR(기머지 커밋 역추적 대조) + MRE/git bisect 트리아지 + 밑바닥 마이크로 재구현(Fault Injection) 중심(80~90%), 실제 PR은 연 2~4건 실전 스파링으로 제한",
+      "rejection_reason": "리뷰 대기 지연(Latency Tax), AI 슬롭 방어로 인한 진입 차단 및 사소한 패치(CLI/문서)로의 선택 편향, 프로덕션 운영·장애 피드백 부재로 시간당 의도적 수련(Deliberate Practice) 밀도가 낮음.",
+      "evidence_ids": [
+        "linearb-2026-8.1m-pr-benchmark",
+        "mitchellh-vouch-2026"
+      ]
+    }
+  ]
+}
