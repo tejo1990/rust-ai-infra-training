@@ -1,0 +1,29 @@
+# Local AI/SSOT state (never push raw SQLite DBs or secrets)
+.ssot/
+.env
+.env.*
+*.pem
+*.key
+
+# Cloned upstream repos for Shadow PR practice (keep out of this repo)
+repos/
+
+# Rust build artifacts
+target/
+Cargo.lock
+
+# Python build/test artifacts
+__pycache__/
+*.py[cod]
+.venv/
+.pytest_cache/
+.hypothesis/
+*.egg-info/
+dist/
+build/
+
+# OS / Editor noise
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
